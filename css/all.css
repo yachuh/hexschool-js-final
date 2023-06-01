@@ -743,6 +743,12 @@ body {
   background-color: #301E5F;
 }
 
+.orderInfo-btn:disabled, .orderInfo-btn[disabled] {
+  background-color: #cccccc;
+  color: #666666;
+  cursor:auto;
+}
+
 .orderPage-list {
   padding: 60px 10px;
   display: -webkit-box;
