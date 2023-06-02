@@ -150,7 +150,8 @@ shoppingCartTable.addEventListener('click', (e) => {
   if (e.target.className === 'discardAllBtn') {
     deleteCartAll()
   } else if (e.target.dataset.cartId) {
-    deleteCartProduct(e.target.dataset.cartId)
+    const id = e.target.dataset.cartId
+    deleteCartProduct(id)
   }
 })
 // Delete all products in cart
@@ -231,6 +232,7 @@ async function submitOrder (e) {
       console.log(message)
     }
     alert('訂單已成功送出！')
+    orderInfoForm.reset()
   } catch (error) {
     console.log(error)
   }
@@ -281,19 +283,17 @@ function formValidation (form) {
 
     const errors = validate(form, constraints, { fullMessages: false })
 
-    if (errors !== undefined) {
-      // submit button disabled
-      orderInfoBtn.setAttribute('disabled', true)
-      // show error messagee
+    if (errors !== undefined) { // Handle errors
+      orderInfoBtn.setAttribute('disabled', true) // Make submit button disabled
       const errorsArray = Object.entries(errors)
-      errorsArray.forEach(error => {
+      errorsArray.forEach(error => { // show error message for each input
         const name = error[0]
         const errorText = error.flat()[1]
         const messageElement = form.querySelector(`[data-message="${name}"]`)
         messageElement.innerText = errorText
       })
       return false
-    } else {
+    } else { // Handle no error
       orderInfoBtn.disabled = false
       return true
     }
