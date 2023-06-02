@@ -232,7 +232,8 @@ async function submitOrder (e) {
       console.log(message)
     }
     alert('訂單已成功送出！')
-    orderInfoForm.reset()
+    orderInfoForm.reset() // Reset form value after submit
+    renderCart() // Re-render cart after submit(will be empty)
   } catch (error) {
     console.log(error)
   }
