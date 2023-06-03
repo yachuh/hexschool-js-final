@@ -137,7 +137,7 @@ async function changeOrderStatus (data) {
 
 /* ---- C3 Chart ---- */
 async function renderChart (orders) {
-  console.log('renderChart() input:::', orders)
+  // console.log('renderChart() input:::', orders)
 
   // Transform data into c3 chart format
   let data = [] // array [ ['Charles 系列儲物組合',780], ['Jordan 雙人床架／雙人加大',9900] ]
@@ -168,7 +168,7 @@ async function renderChart (orders) {
   // Handle if product > 3, includes the rest in '其他'
   const length = data.length
   if (length > 3) {
-    const splicedData = data.splice(length - 3, length - 3)
+    const splicedData = data.splice(3, length - 3)
     let splicedDataAmount = 0
     splicedData.forEach(data => {
       splicedDataAmount += data[1]
@@ -178,6 +178,7 @@ async function renderChart (orders) {
     const otherData = ['其他', splicedDataAmount]
     data.push(otherData)
   }
+  console.log(data)
 
   const chart = c3.generate({
     bindto: '#chart',
@@ -190,7 +191,7 @@ async function renderChart (orders) {
     //   height: 350
     // },
     color: {
-      pattern: ['#2C1C52', '#4E2F99', '#9774E2', '#D7C4FC']
+      pattern: ['#301E5F', '#5434A7', '#9D7EFA', '#DACBFF']
     }
   })
 }

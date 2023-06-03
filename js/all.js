@@ -26,8 +26,8 @@ const renderProductList = async () => {
             />
             <a href="#" class="addCardBtn">加入購物車</a>
             <h3>${item.title}</h3>
-            <del class="originPrice">NT$${item.origin_price}</del>
-            <p class="nowPrice">NT$${item.price}</p>
+            <del class="originPrice">NT$${toThousands(item.origin_price)}</del>
+            <p class="nowPrice">NT$${toThousands(item.price)}</p>
           </li>`
       innerHTML += str
     })
@@ -69,9 +69,9 @@ const renderCart = async () => {
                   <p>${product.title}</p>
                 </div>
               </td>
-              <td>${product.price}</td>
+              <td>${toThousands(product.price)}</td>
               <td>${item.quantity}</td>
-              <td>NT$${(product.price * item.quantity)}</td>
+              <td>NT$${toThousands((product.price * item.quantity))}</td>
               <td class="discardBtn">
                 <a href="#" class="material-icons" data-cart-id=${item.id}> clear </a>
               </td>
@@ -87,7 +87,7 @@ const renderCart = async () => {
               <td>
                 <p>總金額</p>
               </td>
-              <td>NT$${finalTotal}</td>
+              <td>NT$${toThousands(finalTotal)}</td>
             </tr>`
     shoppingCartTable.innerHTML = innerHTML
   } catch (error) {
@@ -257,9 +257,9 @@ function formValidation (form) {
         presence: {
           message: '必填'
         },
-        numericality: {
-          onlyInteger: true,
-          message: '請輸入正確的電話'
+        format: {
+          pattern: /09\d{8}/,
+          message: '請輸入正確的電話格式'
         }
       },
       Email: {
@@ -300,7 +300,7 @@ function formValidation (form) {
     }
   }
 
-  form.addEventListener('change', e => {
+  form.addEventListener('input', e => {
     const input = e.target
     const isValid = validateInput(input)
 
@@ -316,3 +316,11 @@ function formValidation (form) {
   return isValidForm // Return the final isValidForm flag
 }
 formValidation(orderInfoForm)
+
+/* ---- Utilities ---- */
+// Format number in thousands
+function toThousands (num) {
+  const numParts = num.toString().split('.') // Turn num to str & seperate integer
+  numParts[0] = numParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',') // Add comma to thousands
+  return numParts.join('.')
+}
