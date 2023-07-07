@@ -19,7 +19,7 @@
 >
 > ![WOWOROOM](https://github.com/yachuh/hexschool-js-final/assets/16102202/6a0d637a-adce-4f13-9fbd-750f031f3459)
 > 
-> [Admin 頁面](https://yachuh.github.io/hexschool-layout-w5-bs5/admin.html)
+> [Admin 頁面](https://yachuh.github.io/hexschool-js-final/admin.html)
 > 
 > ![WOWOROOM_BS](https://github.com/yachuh/hexschool-js-final/assets/16102202/eaed192e-03a6-434b-859e-21bc35c8eb29)
 
